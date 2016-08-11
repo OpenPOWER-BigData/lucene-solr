@@ -43,18 +43,17 @@
 
     <ibiblio name="rr-snapshot" root="https://oss.sonatype.org/content/repositories/comcarrotsearch-1039" m2compatible="true" />
 
-    <!--
+    
     <filesystem name="local-maven-2" m2compatible="true" local="true">
       <artifact
           pattern="${local-maven2-dir}/[organisation]/[module]/[revision]/[module]-[revision].[ext]" />
       <ivy
           pattern="${local-maven2-dir}/[organisation]/[module]/[revision]/[module]-[revision].pom" />
     </filesystem>
-    -->
+   
 
-    <chain name="default" returnFirst="true" checkmodified="true" changingPattern=".*SNAPSHOT">
+    <chain name="default" returnFirst="false" checkmodified="true" changingPattern=".*SNAPSHOT">
       <resolver ref="local"/>
-      <!-- <resolver ref="local-maven-2" /> -->
       <resolver ref="main"/>
       <resolver ref="maven.restlet.org" />
       <resolver ref="sonatype-releases" />
@@ -62,7 +61,11 @@
       <resolver ref="rr-snapshot"/>
       <!-- <resolver ref="svnkit-releases" /> -->
       <resolver ref="working-chinese-mirror" />
+      <resolver ref="local-maven-2" />
     </chain>
   </resolvers>
-
+  <modules>
+        <module organisation="org.apache.hadoop" resolver="local-maven-2"/>
+        <module organisation="org.apache.zookeeper" name="zookeeper" resolver="local-maven-2"/>
+  </modules>
 </ivysettings>
